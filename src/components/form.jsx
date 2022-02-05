@@ -12,17 +12,9 @@ const Form = () => {
     const [taskList, setTaskList] = useState([])
     const [error, setError] = useState("")
 
-
-    console.log(error, 'Error', task, "task")
     const handleSubmit = (e) => {
         e.preventDefault()
         handValidation(task)
-        let tasks = [...taskList, { id: _uniqueId(), description: task }]
-        if (!error && task.length) {
-            setValue(true)
-            setTaskList(tasks)
-            setTask("")
-        }
     }
 
     const handleChange = (event, id) => {
@@ -46,12 +38,15 @@ const Form = () => {
     const handleEdit = (id) => { }
 
     const handValidation = (task) => {
-        console.log(task)
+        let tasks = [...taskList, { id: _uniqueId(), description: task }]
         if (task.length === 0) {
             setError('Please Enter task')
         }
         else {
             setError("")
+            setValue(true)
+            setTaskList(tasks)
+            setTask("")
         }
     }
     return (

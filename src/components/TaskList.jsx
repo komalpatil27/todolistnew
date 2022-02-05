@@ -2,12 +2,15 @@ import React, { useState } from 'react';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import ModeEditOutlineTwoToneIcon from '@mui/icons-material/ModeEditOutlineTwoTone';
 import Checkbox from '@mui/material/Checkbox';
+import { FamilyRestroomOutlined } from '@mui/icons-material';
 const TaskList = (props) => {
 
     const [isChecked, setIsChecked] = useState(false)
 
-    const handleSelection = (id) => {
-        setIsChecked(!isChecked)
+    const handleSelection = (e, id) => {
+        // console.log(e.target.checked)
+        // console.log(id)
+        setIsChecked(e.target.checked)
     }
     return (
         <div className='list'>
@@ -16,7 +19,7 @@ const TaskList = (props) => {
                     return (
                         <div className='tasklist' key={item.id}>
                             <span>
-                                <Checkbox key={item.id} checked={isChecked} onClick={handleSelection} />
+                                <Checkbox key={item.id} checked={isChecked} onClick={(e) => handleSelection(e, item.id)} />
                             </span>
                             {item.description}
                             <span className='delete'>
