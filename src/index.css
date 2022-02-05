@@ -11,3 +11,62 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.todolist {
+    background-color: #147575;
+    min-height: 100vh;
+    font-size: calc(10px + 2vmin);
+    color: white;
+  
+}
+.todolistheader{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: #93ccc9;
+  height: 10vh;
+  width: 100%;
+  font-size: 20px;
+  padding-top: 20px;
+  padding-left: 20px;
+  color: rgb(10, 8, 8);
+}
+
+.text{
+  width: 600px;
+  height: 10px;
+}
+.formbody{
+  display: flex;
+  justify-content: center;
+}
+.form{
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  color: black;
+  width: 900px;
+  height: 80px;
+}
+.list{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.tasklist{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;;
+  color: rgb(10, 8, 8);
+  background-color: white;
+  border-radius: 4px;
+  border-color: grey;
+  width: 900px;
+  height: 43px;
+  margin-top: 5px;
+}
+.css-k4qjio-MuiFormHelperText-root{
+  color: red !important;
+}
