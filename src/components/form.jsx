@@ -3,21 +3,21 @@ import { TextField } from '@mui/material'
 import Button from '@mui/material/Button';
 import TaskList from './TaskList'
 import _uniqueId from 'lodash/uniqueId';
-
-
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 const Form = () => {
 
     const [task, setTask] = useState("")
     const [submit, setValue] = useState(false)
     const [taskList, setTaskList] = useState([])
     const [error, setError] = useState("")
+    const [isChecked, setIsChecked] = useState(false)
 
     const handleSubmit = (e) => {
         e.preventDefault()
         handValidation(task)
     }
 
-    const handleChange = (event, id) => {
+    const handleChange = (event) => {
         setTask(event.target.value)
     }
     const handleKeyDown = (e) => {
@@ -34,13 +34,24 @@ const Form = () => {
         })
         setTaskList(list)
     }
-
+    // const handleDeleteAll = () => {
+    //     let toDoTasks = [...taskList]
+    //     let list = toDoTasks.filter((item) => {
+    //         return (
+    //             item.isChecked == false
+    //         )
+    //     })
+    //     setTaskList(list)
+    // }
     const handleEdit = (id) => { }
 
     const handValidation = (task) => {
-        let tasks = [...taskList, { id: _uniqueId(), description: task }]
+        let tasks = [{ id: _uniqueId(), description: task, isChecked }, ...taskList]
         if (task.length === 0) {
             setError('Please Enter task')
+        }
+        else if (task.length < 6) {
+            setError('Enter minimum 6 characters')
         }
         else {
             setError("")
@@ -48,6 +59,10 @@ const Form = () => {
             setTaskList(tasks)
             setTask("")
         }
+    }
+
+    const handleSelection = (e, id) => {
+        setIsChecked(e.target.checked)
     }
     return (
         <Fragment>
@@ -63,12 +78,12 @@ const Form = () => {
                             size="small"
                             style={{ paddingBottom: "30px" }}
                             value={task}
-                            onChange={(e) => handleChange(e, task.id)}
+                            onChange={(e) => handleChange(e)}
                             className='text'
                             id="outlined-basic"
                             label={"Add task"}
                             variant="outlined"
-                            helperText={error && "Please enter task"}
+                            helperText={error && error}
                         />
                         <Button
                             variant="contained"
@@ -76,9 +91,16 @@ const Form = () => {
                             onClick={(e) => handleSubmit(e)}>
                             Add
                         </Button>
+                        {/* {isChecked && <DeleteOutlineIcon onClick={() => handleDeleteAll()}
+                            style={{ fill: 'red', cursor: 'pointer' }}
+                        />} */}
                     </div>
                 </div>
-                <TaskList taskList={taskList} submit={submit} onDelete={handleDelete} onEdit={handleEdit} />
+                <TaskList taskList={taskList}
+                    submit={submit}
+                    onDelete={handleDelete}
+                    onEdit={handleEdit}
+                    onSelection={handleSelection} />
             </div>
         </Fragment>);
 }
